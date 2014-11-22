@@ -14,6 +14,8 @@ public class GameController extends WindowController implements ActionListener
     private Player player;
     String[] optionStrings;
     
+    public final int NUM_CHAR_PER_LINE = 73;
+    
     // Used for the display labels
     public int daysLeft, moneyCnt, shipPartsCnt, incomeCnt;
     // Contains help and shop buttons
@@ -36,8 +38,8 @@ public class GameController extends WindowController implements ActionListener
     private FilledRect option1, option2, option3, option4;
     
     // Text for each of the prompt and options
-    private Text promptText;
-    private Text option1text, option2Text, option3Text, option4Text;
+    private Text promptText1, promptText2, promptText3, promptText4;
+    private Text option1text1,option1text2, option2text1, option2text2, option3text1, option3text2, option4text1, option4text2;
     
     // Rect around the shop
     private FilledRect shopRect;
@@ -221,33 +223,121 @@ public class GameController extends WindowController implements ActionListener
         {
             temp = generator.nextInt(20);
         }
+        
         xxActioNxx events = event.getOptions(temp);
         
         // Get prompt string here
         String stringPrompt = "";
-        if ( temp <= 14 )
+        
+        bl.add( new Integer(temp) );
+        
+        if( events instanceof Options )
         {
             stringPrompt = event.getPrompt( temp );
-        
-        }
-        else
-        {
-            RandomEvents tempO = (RandomEvents) events;
-            stringPrompt = tempO.getString();
-            /*
-            for( int i = 0; i < optionArray.size(); i++ )
+            // do optionArray stuff
+            Options op = (Options) events;
+            ArrayList<String> al = op.getString();
+            for( int i = 0; i < al.size();i++)
             {
-                //if (i == 0)
-                    //set first
-                //if (i == 1)
-                    // set second
-                
+                ArrayList<String> optionSeparated = wrapText(al.get(i));
+                // Set first option
+                if( i == 0 )
+                {
+                    option1text1 = new Text(optionSeparated.get(0), 130, 165, canvas);
+                    if (optionSeparated.size() > 1)
+                    {
+                        option1text2 = new Text(optionSeparated.get(1), 130, 185, canvas);
+                    }
+                }
+                // Set second option
+                if( i == 1 )
+                {
+                    option2text1 = new Text(optionSeparated.get(0), 130, 250, canvas);
+                    if (optionSeparated.size() > 1)
+                    {
+                        option1text2 = new Text(optionSeparated.get(1), 130, 270, canvas);
+                    }
+                }
+                // Set third option
+                if( i == 2 )
+                {
+                    option3text1 = new Text(optionSeparated.get(0), 130, 335, canvas);
+                    if (optionSeparated.size() > 1)
+                    {
+                        option1text2 = new Text(optionSeparated.get(1), 130, 355, canvas);
+                    }
+                }
+                // Set fourth option
+                if( i == 3 )
+                {
+                    option4text1 = new Text(optionSeparated.get(0), 130, 420, canvas);
+                    if (optionSeparated.size() > 1)
+                    {
+                        option1text2 = new Text(optionSeparated.get(1), 130, 440, canvas);
+                    }
+                }
             }
-             */
+            
+        } else
+        {
+            stringPrompt = event.getPrompt( temp );
+            // remove rects covering options
         }
-
+        
         System.out.println(stringPrompt);
-        promptText = new Text(stringPrompt, 125, 35, canvas);
+        
+        ArrayList<String> separated_strings = wrapText(stringPrompt);
+        
+        for( int i = 0; i < separated_strings.size(); i++ )
+        {
+            if (i == 0)
+            //set first
+            {
+                promptText1 = new Text(separated_strings.get(i), 130, 35, canvas);
+                promptText1.setBold(true);
+            }
+            if (i == 1)
+            // set second
+            {
+                promptText2 = new Text(separated_strings.get(i), 130, 55, canvas);
+                promptText2.setBold(true);
+            }
+            if (i == 2)
+            {
+                promptText3 = new Text(separated_strings.get(i), 130, 75, canvas);
+                promptText3.setBold(true);
+            }
+            if (i == 3)
+            {
+                promptText4 = new Text(separated_strings.get(i), 130, 95, canvas);
+                promptText4.setBold(true);
+            }
+        }
+    }
+    
+    public ArrayList<String> wrapText(String input)
+    {
+        String s = new String();
+        StringTokenizer st = new StringTokenizer(input);
+        
+        ArrayList<String> output = new ArrayList<String>();
+        
+        while( st.hasMoreTokens())
+        {
+            String temp = st.nextToken();
+            if ( (s.length() + temp.length()) > NUM_CHAR_PER_LINE)
+            {
+                // Get last word
+                output.add(s);
+                s = new String();
+            }
+            
+            s += temp + " ";
+        }
+        
+        output.add(s);
+        
+        return output;
     }
     
     // Opens and closes shop
@@ -366,6 +456,10 @@ public class GameController extends WindowController implements ActionListener
             if(option4.isHidden()) { option4.show(); };
             
             curShowHelp = false;
+            if (daysLeft == 20)
+            {
+                nextDay();
+            }
         }
         else {
             // Shop not being displayed and needs to be shown, first check if coming from
@@ -410,11 +504,6 @@ public class GameController extends WindowController implements ActionListener
             helpText9.show();
             
             curShowHelp = true;
-        }
-        
-        if (daysLeft == 20)
-        {
-            nextDay();
         }
     }
     
