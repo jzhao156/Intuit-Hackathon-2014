@@ -1,10 +1,14 @@
 import java.util.ArrayList;
-
+import java.til.Random;
 public class Player
 {
-    final int MONEY_DEFAULT = 100000;
+    final int MONEY_DEFAULT = 90000;
     final int MONEY_INCOME  =  10000;
     final int NUM_OF_PARTS = 5;
+
+    final int LUCK_MIN = 1;
+    final int LUCK_MAX = 100;
+
     int bigMoney;
     int luck;
     /*  Nuclear Core = shipParts[0]
@@ -15,7 +19,7 @@ public class Player
      */
     
     ArrayList<Integer>[] shipParts = new ArrayList[ NUM_OF_PARTS ];
-    
+    Random rand = new Random();
     //initialize
     public Player()
     {
@@ -49,10 +53,11 @@ public class Player
 
     int nextDay() {
         bigMoney += MONEY_INCOME;
+        luck = rand.nextInt(LUCK_MAX) + LUCK_MIN;
         return bigMoney; 
     }
 
-    int addMoneyy( int gettinMoney ) {
+    int addMoney( int gettinMoney ) {
         bigMoney += gettinMoney;
         return bigMoney;
     }
@@ -62,5 +67,10 @@ public class Player
         //or die on earth
         bigMoney -= losinMoney;
         return bigMoney;
+    }
+
+    int getLuck()
+    {
+        return luck;
     }
 }
