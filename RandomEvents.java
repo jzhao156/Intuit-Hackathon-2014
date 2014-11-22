@@ -9,7 +9,11 @@ public class RandomEvents extends xxActioNxx
         toDoArray = arg2;
         event = ev;
     }
-    
+   
+    public String getString()
+    {
+        return event;
+    }
     public ArrayList<toDo> getToDoArray()
     {
         return toDoArray;
