@@ -9,11 +9,11 @@ final int FOUR = 4;
 
 //helps you when doing part #
 final int NP = -1; //no part
-final int NC = 0;
-final int WS = 1;
-final int TH = 2;
+final int CP = 0;
+final int NC = 1;
+final int WS = 2;
 final int LS = 3;
-final int CP = 4;
+final int TH = 4;
 
 ArrayList<Options> options;
 
