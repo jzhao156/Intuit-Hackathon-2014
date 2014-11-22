@@ -27,10 +27,12 @@ public class GameController extends JApplet implements ActionListener//, Mouseli
         
         shopButton.addActionListener(this);
         helpButton.addActionListener(this);
+        
     }
     
     public void actionPerformed(ActionEvent evt)
     {
         //TODO
+        System.out.println("Poop");
     }
 }
