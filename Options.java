@@ -1,22 +1,22 @@
 import java.util.*;
 
-public class Options
+public class Options extends xxActioNxx
 {
   private ArrayList<String> str = new ArrayList<String>();
-  private ArrayList<toDo> vals = new ArrayList<toDo>();
+  //private ArrayList<toDo> toDoArray = new ArrayList<toDo>();
   
   public Options(ArrayList<String> arg1, ArrayList<toDo> arg2)
   {
     this.str = arg1;
-    this.vals = arg2;
+    this.toDoArray = arg2;
   }
   
   public ArrayList<String> getString()
   {
     return this.str;
   }
-  public ArrayList<toDo> getVals()
+  public ArrayList<toDo> getToDoArray()
   {
-    return this.vals;
+    return this.toDoArray;
   }
 }
