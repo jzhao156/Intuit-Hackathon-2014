@@ -6,9 +6,23 @@ import java.applet.*;
 
 public class GameController extends JApplet //implements MouseListener, ActionListener
 {
-public void init ()
+    private JPanel bottomPanel = new JPanel(new FlowLayout());
+    private JPanel imagePanel = new JPanel();
+    private JButton shopButton;
+    private JButton helpButton;
+    
+    public void init ()
     {
-        JLabel lbl = new JLabel("Hello World");
-        add(lbl);
+        ImageIcon x = new ImageIcon(this.getClass().getResource("testImage.jpg"));
+        JLabel test = new JLabel(x);
+        
+        shopButton = new JButton("Shop");
+        helpButton = new JButton("Help");
+        
+        bottomPanel.add(test);
+        bottomPanel.add(shopButton);
+        bottomPanel.add(helpButton);
+        
+        add(bottomPanel);
     }
 }
