@@ -1,8 +1,53 @@
 
+//add job
+
+//process events
+
+//empty/reset array
+
+//options appear
+ // if options, options appear
+ // if randomevent, options dissappear
+
+//???
+
+actionListener( ): // 0 - 3 selection
+    
+    int selection;
+    if event.whatever == Option0
+        selection = 0;
+    else if whatever == OPtion1
+        selection = 1;
+    else if whatever == Option2
+        selection = 2;
+    else if whatever == Option3
+        selection = 3;
+
+    if( selection != null ) // not randomevent
+{
+
+    nextDay();
+    //add toDo of option selected and then add that toDo to toDoArray.
+}else{
+    // add toDo of option selected and add toDo to toDoArray
+    nextDay();
+}
 
 
-HashMap
 
+
+
+
+
+
+
+    if( events instanceof Options )
+        
+        toDoArray.add( events.getToDoArray().get( selection ) );
+    else
+        toDoArray.add( events.getToDoArray().get( 
+// when randomEvent
+actionListener
 
 
 
