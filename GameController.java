@@ -40,12 +40,17 @@ public class GameController extends WindowController implements ActionListener
     private boolean curShowHelp = false;
     private boolean curShowShop = false;
     
+    // Whether or not the game has been finished
+    private boolean gameFinished = false;
+    
     // Background of the game
     private VisibleImage space_Background;
     // Pictures of each item in the shop
     private VisibleImage thrusterPic, corePic, wingsPic, cockpitPic, lifeSupportPic;
     // Pictures of "Purchase" button in the shop
     private VisibleImage purchasePic1,  purchasePic2, purchasePic3, purchasePic4, purchasePic5;
+    // Lose game screen
+    private VisibleImage losePic;
     
     public void begin ()
     {
@@ -62,9 +67,9 @@ public class GameController extends WindowController implements ActionListener
         helpTextRect = new FilledRect(50, 40, 670, 250, canvas);
         helpTextRect.setColor(Color.WHITE);
         
-        helpText1 = new Text("Welcome to Spaceship Escape Finance Game! Greetings future resident! Your home planet, once beautiful", 60, 50, canvas);
-        helpText2 = new Text("and thriving, has reached the end of it's days and in just 20 days it will explode! You need to generate", 60, 70, canvas);
-        helpText3 = new Text("enough money to buy 5 spaceship parts to rocket away to safety!", 60, 90, canvas);
+        helpText1 = new Text("The world is in danger of being destroyed by giant spaghetti monsters. You are our only hope. You must ", 60, 50, canvas);
+        helpText2 = new Text("wisely allocate your resources and properly assess risk to find a way to fund the construction of the best ", 60, 70, canvas);
+        helpText3 = new Text("possible spaceship. You have only 20 days to do so. Good luck.", 60, 90, canvas);
         helpText4 = new Text("How To Play: In the game, there will be options for you to select. You must select ONE option to advance", 60, 120, canvas);
         helpText5 = new Text("to the next turn. Each option will contain a explanation as to how that decision will affect your financial", 60, 140, canvas);
         helpText6 = new Text("situation. REMEMBER, the goal is to obtain your FIVE spaceship parts. THE ONLY WAY TO BUY PARTS", 60, 160, canvas);
@@ -195,6 +200,11 @@ public class GameController extends WindowController implements ActionListener
     // Opens and closes shop
     public void shopAction()
     {
+        if (gameFinished)
+        {
+            return;
+        }
+        
         if (curShowShop)
         {
             // Hide the shop and go back to main menu
@@ -276,6 +286,11 @@ public class GameController extends WindowController implements ActionListener
     // Hides and closes help menu
     public void helpAction()
     {
+        // If the game is finished, help button shouldn't do anything
+        if (gameFinished)
+        {
+            return;
+        }
         if(curShowHelp)
         {
             // Shop currently being shown and needs to be hidden
@@ -344,8 +359,28 @@ public class GameController extends WindowController implements ActionListener
         }
     }
     
+    public void loseGame()
+    {
+        losePic = new VisibleImage(getImage("images/LoseScreen.jpg"), 0 ,0, canvas);
+        gameFinished = true;
+    }
+    
+    public void winGame()
+    {
+        gameFinished = true;
+    }
+    
     public void onMouseClick(Location mousePosition)
     {
+        // Reset the game
+        if (gameFinished)
+        {
+            gameFinished = false;
+            losePic.hide();
+            
+            // TODO reset the game properties
+            
+        }
         if(option1.contains(mousePosition) && !option1.isHidden())
         {
             //do option 1
