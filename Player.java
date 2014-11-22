@@ -6,6 +6,7 @@ public class Player
 {
     final int MONEY_DEFAULT_SAVINGS = 90000;
     final int MONEY_DEFAULT_INCOME  =  10000;
+    final int DEFAULT_LUCK = 1;
     final int NUM_OF_PARTS = 5;
 
     final int LUCK_MIN = 1;
@@ -64,7 +65,7 @@ public class Player
     {
         income = MONEY_DEFAULT_INCOME;
         bigMoney = MONEY_DEFAULT_SAVINGS;
-
+        luck = DEFAULT_LUCK;
     }
 
     public Player( int sav, int inc )
@@ -76,6 +77,8 @@ public class Player
     
     void addPartIncome( int part, int inc )
     {
+        if (part == -1)
+            return;
         this.addPart( new Integer(part) );
         this.addIncome( inc );
     }
@@ -88,6 +91,9 @@ public class Player
 
     void addPart( int part )
     {
+        if (part == -1)
+            return;
+
         shipParts.add( new Integer(part) );
     }
 
