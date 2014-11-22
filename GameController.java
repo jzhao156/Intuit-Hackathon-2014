@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.applet.*;
 
-public class GameController extends JApplet //implements MouseListener, ActionListener
+public class GameController extends JApplet implements ActionListener//, Mouselistener
 {
     private JPanel bottomPanel = new JPanel(new FlowLayout());
     private JPanel imagePanel = new JPanel();
@@ -24,5 +24,13 @@ public class GameController extends JApplet //implements MouseListener, ActionLi
         bottomPanel.add(helpButton);
         
         add(bottomPanel);
+        
+        shopButton.addActionListener(this);
+        helpButton.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent evt)
+    {
+        //TODO
     }
 }
