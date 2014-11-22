@@ -17,12 +17,11 @@ public class GameController extends WindowController implements ActionListener
     private JLabel days, money, parts;
     private Text helpText1, helpText2, helpText3, helpText4, helpText5, helpText6, helpText7, helpText8, helpText9;
     private Text thrusterText, coreText, wingsText, cockpitText, lifeSupportText, pressShopText;
-    private Text purchaseText1, purchaseText2, purchaseText3, purchaseText4, purchaseText5;
     
     private FilledRect prompt;
     private FilledRect option1, option2, option3, option4;
     private FilledRect shopRect;
-    private FilledRect purchasePic1, purchasePic2, purchasePic3, purchasePic4, purchasePic5;
+    private VisibleImage purchasePic1,  purchasePic2, purchasePic3, purchasePic4, purchasePic5;
     
     private FilledRect helpTextRect;
     
@@ -113,43 +112,17 @@ public class GameController extends WindowController implements ActionListener
         cockpitPic.hide();
         lifeSupportPic.hide();
         
-        purchasePic1 = new FilledRect(500, 60, 170, 60, canvas);
-        purchasePic1.setColor(Color.GREEN);
-        purchaseText1 = new Text("$PURCHASE", 505, 70, canvas);
-        purchaseText1.setFontSize(28);
-        //purchasedPic1 = new FilledRect(500, 60, 200, 60, canvas);
-        purchasePic2 = new FilledRect(500, 140, 170, 60, canvas);
-        purchasePic2.setColor(Color.GREEN);
-        purchaseText2 = new Text("$PURCHASE", 505, 150, canvas);
-        purchaseText2.setFontSize(28);
-        //purchasedPic2 = new FilledRect(500, 140, 200, 60, canvas);
-        purchasePic3 = new FilledRect(500, 220, 170, 60, canvas);
-        purchasePic3.setColor(Color.GREEN);
-        purchaseText3 = new Text("$PURCHASE", 505, 230, canvas);
-        purchaseText3.setFontSize(28);
-        //purchasedPic3 = new FilledRect(500, 220, 200, 60, canvas);
-        purchasePic4 = new FilledRect(500, 300, 170, 60, canvas);
-        purchasePic4.setColor(Color.GREEN);
-        purchaseText4 = new Text("$PURCHASE", 505, 310, canvas);
-        purchaseText4.setFontSize(28);
-        //purchasedPic4 = new FilledRect(500, 300, 200, 60, canvas);
-        purchasePic5 = new FilledRect(500, 380, 170, 60, canvas);
-        purchasePic5.setColor(Color.GREEN);
-        purchaseText5 = new Text("$PURCHASE", 505, 390, canvas);
-        purchaseText5.setFontSize(28);
-        //purchasedPic5  = new FilledRect(500, 380, 200, 60, canvas);
+        purchasePic1 = new VisibleImage(getImage("Purchase.jpg"), 500, 60, canvas);
+        purchasePic2 = new VisibleImage(getImage("Purchase.jpg"), 500, 140, canvas);
+        purchasePic3 = new VisibleImage(getImage("Purchase.jpg"), 500, 220, canvas);
+        purchasePic4 = new VisibleImage(getImage("Purchase.jpg"), 500, 300, canvas);
+        purchasePic5 = new VisibleImage(getImage("Purchase.jpg"), 500, 380, canvas);
         
         purchasePic1.hide();
         purchasePic2.hide();
         purchasePic3.hide();
         purchasePic4.hide();
         purchasePic5.hide();
-        
-        purchaseText1.hide();
-        purchaseText2.hide();
-        purchaseText3.hide();
-        purchaseText4.hide();
-        purchaseText5.hide();
         
         shopButton = new JButton("Shop");
         helpButton = new JButton("Help");
@@ -214,11 +187,6 @@ public class GameController extends WindowController implements ActionListener
             purchasePic3.hide();
             purchasePic4.hide();
             purchasePic5.hide();
-            purchaseText1.hide();
-            purchaseText2.hide();
-            purchaseText3.hide();
-            purchaseText4.hide();
-            purchaseText5.hide();
             thrusterPic.hide();
             corePic.hide();
             wingsPic.hide();
@@ -273,11 +241,6 @@ public class GameController extends WindowController implements ActionListener
             purchasePic3.show();
             purchasePic4.show();
             purchasePic5.show();
-            purchaseText1.show();
-            purchaseText2.show();
-            purchaseText3.show();
-            purchaseText4.show();
-            purchaseText5.show();
             thrusterPic.show();
             corePic.show();
             wingsPic.show();
@@ -329,11 +292,6 @@ public class GameController extends WindowController implements ActionListener
                 purchasePic3.hide();
                 purchasePic4.hide();
                 purchasePic5.hide();
-                purchaseText1.hide();
-                purchaseText2.hide();
-                purchaseText3.hide();
-                purchaseText4.hide();
-                purchaseText5.hide();
                 thrusterPic.hide();
                 corePic.hide();
                 wingsPic.hide();
