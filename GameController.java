@@ -76,19 +76,19 @@ public class GameController extends WindowController implements ActionListener
         
         shopRect.hide();
         
-        thrusterText = new Text("Thrusters, $200,000", 200, 80, canvas);
+        thrusterText = new Text("Thrusters       $200,000", 200, 80, canvas);
         thrusterText.setFontSize(24);
         thrusterText.setBold(true);
-        coreText = new Text("Nuclear Core, $200,000", 200, 160, canvas);
+        coreText = new Text("Nuclear Core  $200,000", 200, 160, canvas);
         coreText.setFontSize(24);
         coreText.setBold(true);
-        wingsText = new Text("Jet Wings, $200,000", 200, 240, canvas);
+        wingsText = new Text("Jet Wings       $200,000", 200, 240, canvas);
         wingsText.setFontSize(24);
         wingsText.setBold(true);
-        cockpitText = new Text( "Cockpit, $200,000", 200, 320, canvas);
+        cockpitText = new Text( "Cockpit          $200,000", 200, 320, canvas);
         cockpitText.setFontSize(24);
         cockpitText.setBold(true);
-        lifeSupportText = new Text("Life Support, $200,000", 200, 400, canvas);
+        lifeSupportText = new Text("Life Support   $200,000", 200, 400, canvas);
         lifeSupportText.setFontSize(24);
         lifeSupportText.setBold(true);
         pressShopText = new Text("Press Shop to return to the game", 250, 460, canvas);
