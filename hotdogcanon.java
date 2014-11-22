@@ -1,6 +1,16 @@
 
 
 
+HashMap
+
+
+
+
+
+
+
+
+
 
 
 // hi jerry
@@ -17,7 +27,7 @@
 
 
 ArrayList< xxActioNxx > events;
-ArrayList< toDo > toDoArray;
+ArrayList< toDo > toDoArray; // woof!!!
 ArrayList< Integer > bl;
 Event event;
 Player player;
@@ -31,21 +41,34 @@ String[] optionStrings;
         player = new Player();
         event = new Event( player );
         events = event.getOptions();
-        toDoArray = event.getToDoArray();
+        toDoArray = new ArrayList<toDo>(); // do this!!
         nextDay();
     }
 
 void nextDay()
 {
-    
+    //add job to toDoArray
+    toDoArray.add( new toDo( -1, -1, 10000, 0 ) ); // adding job!!
+    //process toDoArray
+    for(int i = 0; i < toDoArray.size(); i++)
+    {
+        toDo tempT = toDoArray.get(i);
+        player.addPart( tempT.getPart() );
+        player.addIncome( tempT.getDelInc() );
+        player.addSavings( tempT.getDelSav() );
+    }
+    //set empty toDoArray
+    toDoArray = new ArrayList<toDo>();
+    //get new toDos here!
+    //
     int temp = rand (events.size());
     while( bl.contains( new Integer(temp) )
             temp = rand( events.size() );
+    bl.add( temp );
     // GET PROMPT STRING HERE!!!
     String prompt = event.getPrompt( temp );
     
-    // add to black list since its not on it and it's gonna do it.
-    bl.add( temp );    
+        
     // IF POSSIBLE, GET OPTIONS
     xxActioNxx tempA = events.get( temp );
     if( tempA instanceof Options )
@@ -63,8 +86,4 @@ void nextDay()
     }
     
     // go to next screen, homepage
-    event.nextDay();
 }
-temptoDo = eventVal.get( 
-if ( temptoDo.getIndex() >= options.size() )
-    // d`o not put options
