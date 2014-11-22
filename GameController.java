@@ -8,33 +8,48 @@ import objectdraw.*;
 
 public class GameController extends WindowController implements ActionListener
 {
+    // Used for the display labels
     public int daysLeft, moneyCnt, shipPartsCnt, incomeCnt;
+    // Contains help and shop buttons
     private JPanel bottomPanel = new JPanel(new FlowLayout());
+    // Contains the labels of info
     private JPanel topPanel = new JPanel(new FlowLayout());
-    private JPanel imagePanel = new JPanel();
+    // Opens up shop
     private JButton shopButton;
+    // Opens up help menu
     private JButton helpButton;
+    // Labels in top panel displaying info about the game
     private JLabel days, money, parts, income;
+    // Intro and help menu text
     private Text helpText1, helpText2, helpText3, helpText4, helpText5, helpText6, helpText7, helpText8, helpText9;
+    // Text about each item in the shop
     private Text thrusterText, coreText, wingsText, cockpitText, lifeSupportText, pressShopText;
     
+    // Rects around the prompt and options
     private FilledRect prompt;
     private FilledRect option1, option2, option3, option4;
-    private FilledRect shopRect;
-    private VisibleImage purchasePic1,  purchasePic2, purchasePic3, purchasePic4, purchasePic5;
     
+    // Rect around the shop
+    private FilledRect shopRect;
+    // Rect around the help text
     private FilledRect helpTextRect;
     
     private Player player;
     
+    // Whether the help and shop menus are currently open
     private boolean curShowHelp = false;
     private boolean curShowShop = false;
     
+    // Background of the game
     private VisibleImage space_Background;
+    // Pictures of each item in the shop
     private VisibleImage thrusterPic, corePic, wingsPic, cockpitPic, lifeSupportPic;
+    // Pictures of "Purchase" button in the shop
+    private VisibleImage purchasePic1,  purchasePic2, purchasePic3, purchasePic4, purchasePic5;
     
     public void begin ()
     {
+        // Initialize ALL THE THINGS
         player = new Player();
         
         moneyCnt = player.bigMoney;
@@ -134,9 +149,9 @@ public class GameController extends WindowController implements ActionListener
         shopButton.setPreferredSize( new Dimension(300, 75));
         helpButton.setPreferredSize( new Dimension(300, 75));
         
-        days = new JLabel("Days left: " + daysLeft + "  ");
-        parts = new JLabel("Ship Parts: " + shipPartsCnt + "/5  ");
-        income = new JLabel("Income: " + "$" + incomeCnt + "/turn  ");
+        days = new JLabel("Days left: " + daysLeft + " ");
+        parts = new JLabel("Ship Parts: " + shipPartsCnt + "/5 ");
+        income = new JLabel("Income: " + "$" + incomeCnt + "/turn ");
         money = new JLabel( "Money: " + "$" + moneyCnt);
         
         days.setFont(days.getFont().deriveFont(18.0f));
@@ -159,13 +174,14 @@ public class GameController extends WindowController implements ActionListener
         
         this.validate();
         
+        // Only display shop things (for now anyway)
         helpAction();
         
     }
     
+    // If either button clicked
     public void actionPerformed(ActionEvent evt)
     {
-        //TODO
         if (evt.getSource() == shopButton)
         {
             shopAction();
@@ -176,6 +192,7 @@ public class GameController extends WindowController implements ActionListener
         }
     }
     
+    // Opens and closes shop
     public void shopAction()
     {
         if (curShowShop)
@@ -256,6 +273,7 @@ public class GameController extends WindowController implements ActionListener
         }
     }
     
+    // Hides and closes help menu
     public void helpAction()
     {
         if(curShowHelp)
