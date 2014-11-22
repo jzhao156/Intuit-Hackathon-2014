@@ -10,7 +10,7 @@ public class RandomEvents extends xxActioNxx
         event = ev;
     }
     
-    public ArrayList<toDo> returnToDoArray()
+    public ArrayList<toDo> getToDoArray()
     {
         return toDoArray;
     }
