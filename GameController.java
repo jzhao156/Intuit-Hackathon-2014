@@ -21,7 +21,7 @@ public class GameController extends WindowController implements ActionListener
     private Player player;
     String[] optionStrings;
     
-    public final int NUM_CHAR_PER_LINE = 73;
+    public final int NUM_CHAR_PER_LINE = 60;
     
     int index = 0;
     
@@ -109,19 +109,19 @@ public class GameController extends WindowController implements ActionListener
         helpText8 = new Text("parts, you will LOSE. If you run out of money, you will also lose! So be careful on how you spend money!", 60, 200, canvas);
         helpText9 = new Text("Click on this prompt to hide this text and return to the game.", 60, 250, canvas);
         
-        prompt = new FilledRect(125, 35, 500, 100, canvas);
+        prompt = new FilledRect(100, 35, 550, 100, canvas);
         prompt.setColor(Color.WHITE);
         
-        option1 = new FilledRect(125, 165, 500, 70, canvas);
+        option1 = new FilledRect(100, 165, 550, 70, canvas);
         option1.setColor(Color.WHITE);
         
-        option2 = new FilledRect(125, 250, 500, 70, canvas);
+        option2 = new FilledRect(100, 250, 550, 70, canvas);
         option2.setColor(Color.WHITE);
         
-        option3 = new FilledRect(125, 335, 500, 70, canvas);
+        option3 = new FilledRect(100, 335, 550, 70, canvas);
         option3.setColor(Color.WHITE);
         
-        option4 = new FilledRect(125, 420, 500, 70, canvas);
+        option4 = new FilledRect(100, 420, 550, 70, canvas);
         option4.setColor(Color.WHITE);
         
         shopRect = new FilledRect(50, 50, 650, 425, canvas);
@@ -373,36 +373,44 @@ public class GameController extends WindowController implements ActionListener
                 if( i == 0 )
                 {
                     option1text1 = new Text(optionSeparated.get(0), 130, 165, canvas);
+                    option1text1.setFontSize(16);
                     if (optionSeparated.size() > 1)
                     {
-                        option1text2 = new Text(optionSeparated.get(1), 130, 185, canvas);
+                        option1text2 = new Text(optionSeparated.get(1), 130, 190, canvas);
+                        option1text2.setFontSize(16);
                     }
                 }
                 // Set second option
                 if( i == 1 )
                 {
                     option2text1 = new Text(optionSeparated.get(0), 130, 250, canvas);
+                    option2text1.setFontSize(16);
                     if (optionSeparated.size() > 1)
                     {
-                        option2text2 = new Text(optionSeparated.get(1), 130, 270, canvas);
+                        option2text2 = new Text(optionSeparated.get(1), 130, 275, canvas);
+                        option2text2.setFontSize(16);
                     }
                 }
                 // Set third option
                 if( i == 2 )
                 {
                     option3text1 = new Text(optionSeparated.get(0), 130, 335, canvas);
+                    option3text1.setFontSize(16);
                     if (optionSeparated.size() > 1)
                     {
-                        option3text2 = new Text(optionSeparated.get(1), 130, 355, canvas);
+                        option3text2 = new Text(optionSeparated.get(1), 130, 360, canvas);
+                        option3text2.setFontSize(16);
                     }
                 }
                 // Set fourth option
                 if( i == 3 )
                 {
                     option4text1 = new Text(optionSeparated.get(0), 130, 420, canvas);
+                    option4text1.setFontSize(16);
                     if (optionSeparated.size() > 1)
                     {
-                        option4text2 = new Text(optionSeparated.get(1), 130, 440, canvas);
+                        option4text2 = new Text(optionSeparated.get(1), 130, 445, canvas);
+                        option4text2.setFontSize(16);
                     }
                 }
             }
@@ -449,28 +457,28 @@ public class GameController extends WindowController implements ActionListener
             if (i == 0)
             //set first
             {
-                promptText1 = new Text(separated_strings.get(i), 130, 35, canvas);
+                promptText1 = new Text(separated_strings.get(i), 105, 35, canvas);
                 promptText1.setBold(true);
-                promptText1.setFontSize(24);
+                promptText1.setFontSize(16);
             }
             if (i == 1)
             // set second
             {
-                promptText2 = new Text(separated_strings.get(i), 130, 70, canvas);
+                promptText2 = new Text(separated_strings.get(i), 105, 60, canvas);
                 promptText2.setBold(true);
-                promptText2.setFontSize(24);
+                promptText2.setFontSize(16);
             }
             if (i == 2)
             {
-                promptText3 = new Text(separated_strings.get(i), 130, 105, canvas);
+                promptText3 = new Text(separated_strings.get(i), 105, 85, canvas);
                 promptText3.setBold(true);
-                promptText3.setFontSize(24);
+                promptText3.setFontSize(16);
             }
             if (i == 3)
             {
-                promptText4 = new Text(separated_strings.get(i), 130, 140, canvas);
+                promptText4 = new Text(separated_strings.get(i), 105, 110, canvas);
                 promptText4.setBold(true);
-                promptText4.setFontSize(24);
+                promptText4.setFontSize(16);
             }
         }
         
