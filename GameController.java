@@ -8,6 +8,12 @@ import objectdraw.*;
 
 public class GameController extends WindowController implements ActionListener
 {
+    ArrayList< toDo > toDoArray;
+    ArrayList< Integer > bl;
+    Event event;
+    private Player player;
+    String[] optionStrings;
+    
     // Used for the display labels
     public int daysLeft, moneyCnt, shipPartsCnt, incomeCnt;
     // Contains help and shop buttons
@@ -29,12 +35,14 @@ public class GameController extends WindowController implements ActionListener
     private FilledRect prompt;
     private FilledRect option1, option2, option3, option4;
     
+    // Text for each of the prompt and options
+    private Text promptText;
+    private Text option1text, option2Text, option3Text, option4Text;
+    
     // Rect around the shop
     private FilledRect shopRect;
     // Rect around the help text
     private FilledRect helpTextRect;
-    
-    private Player player;
     
     // Whether the help and shop menus are currently open
     private boolean curShowHelp = false;
@@ -53,11 +61,17 @@ public class GameController extends WindowController implements ActionListener
     private VisibleImage losePic;
     // Win game screen
     private VisibleImage winPic;
+
+    //Random number generator
+    private Random generator = new Random();
+
     
     public void begin ()
     {
         // Initialize ALL THE THINGS
         player = new Player();
+        bl = new ArrayList<Integer>();
+        event = new Event(player);
         
         moneyCnt = player.bigMoney;
         daysLeft = 20;
@@ -198,6 +212,43 @@ public class GameController extends WindowController implements ActionListener
             helpAction();
         }
     }
+    // add global vars
+    public void nextDay()
+    {
+        // If possible, get options
+        int temp = generator.nextInt(20);
+        while (bl.contains (new Integer(temp)))
+        {
+            temp = generator.nextInt(20);
+        }
+        xxActioNxx events = event.getOptions(temp);
+        
+        // Get prompt string here
+        String stringPrompt = "";
+        if ( temp <= 14 )
+        {
+            stringPrompt = event.getPrompt( temp );
+        
+        }
+        else
+        {
+            RandomEvents tempO = (RandomEvents) events;
+            stringPrompt = tempO.getString();
+            /*
+            for( int i = 0; i < optionArray.size(); i++ )
+            {
+                //if (i == 0)
+                    //set first
+                //if (i == 1)
+                    // set second
+                
+            }
+             */
+        }
+
+        System.out.println(stringPrompt);
+        promptText = new Text(stringPrompt, 125, 35, canvas);
+    }
     
     // Opens and closes shop
     public void shopAction()
@@ -288,6 +339,7 @@ public class GameController extends WindowController implements ActionListener
     // Hides and closes help menu
     public void helpAction()
     {
+        
         // If the game is finished, help button shouldn't do anything
         if (gameFinished)
         {
@@ -358,6 +410,11 @@ public class GameController extends WindowController implements ActionListener
             helpText9.show();
             
             curShowHelp = true;
+        }
+        
+        if (daysLeft == 20)
+        {
+            nextDay();
         }
     }
     
