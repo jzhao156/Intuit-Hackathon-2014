@@ -2,18 +2,19 @@ import java.util.*;
 
 public class RandomEvents extends xxActioNxx
 {
-    private String event;
+    //private String event;
     
-    public RandomEvents( String ev, ArrayList<toDo> arg2 )
+    public RandomEvents( ArrayList<toDo> arg )
     {
-        toDoArray = arg2;
-        event = ev;
+        toDoArray = arg;
+        //event = ev;
     }
-   
+   /*
     public String getString()
     {
         return event;
     }
+    */
     public ArrayList<toDo> getToDoArray()
     {
         return toDoArray;
