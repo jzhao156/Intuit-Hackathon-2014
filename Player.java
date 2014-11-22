@@ -93,10 +93,14 @@ public class Player
     {
         if (part == -1)
             return;
-
-        shipParts.add( new Integer(part) );
+        if (!isPart( part) )
+            shipParts.add( new Integer(part) );
     }
 
+    int getShipSize()
+    {
+        return shipParts.size();
+    }
     boolean isPart( int part )
     {
         return shipParts.contains( new Integer(part) );
