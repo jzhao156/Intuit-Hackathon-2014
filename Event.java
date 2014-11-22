@@ -5,7 +5,6 @@ public class Event
   private ArrayList<String> startPrompt= new ArrayList<String>();
   private ArrayList<String> prompts = new ArrayList<String>();
   private ArrayList<xxActioNxx> options= new ArrayList<xxActioNxx>();
-  private HashMap <Integer, ArrayList<toDo>> hm;
   
   
   //cockpit,nuclear core, wings, life support, thrusters are the parts
@@ -13,7 +12,6 @@ public class Event
   public Event(Player p)
   { 
     ////////////////////////////////////START PROMPT///////////////////////////////////////////////
-    hm = new HashMap<Integer,ArrayList<toDo>>();
     
     startPrompt.add("Welcome scientist.");
     startPrompt.add("The world is in danger of being destroyed by giant spaghetti monsters. You are our only hope. You"
@@ -402,6 +400,8 @@ public class Event
     options.add(event2);
     options.add(event3);
     options.add(event4);
+    
+
                  
   }
   
