@@ -51,6 +51,8 @@ public class GameController extends WindowController implements ActionListener
     private VisibleImage purchasePic1,  purchasePic2, purchasePic3, purchasePic4, purchasePic5;
     // Lose game screen
     private VisibleImage losePic;
+    // Win game screen
+    private VisibleImage winPic;
     
     public void begin ()
     {
@@ -193,7 +195,7 @@ public class GameController extends WindowController implements ActionListener
         }
         if (evt.getSource() == helpButton)
         {
-            this.helpAction();
+            helpAction();
         }
     }
     
@@ -367,6 +369,7 @@ public class GameController extends WindowController implements ActionListener
     
     public void winGame()
     {
+        winPic = new VisibleImage(getImage("images/WinScreen.jpg"), 0, 0, canvas);
         gameFinished = true;
     }
     
@@ -376,7 +379,14 @@ public class GameController extends WindowController implements ActionListener
         if (gameFinished)
         {
             gameFinished = false;
-            losePic.hide();
+            if (losePic != null)
+            {
+                losePic.hide();
+            }
+            else if (winPic != null)
+            {
+                winPic.hide();
+            }
             
             // TODO reset the game properties
             
