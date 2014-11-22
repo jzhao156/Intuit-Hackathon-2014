@@ -67,12 +67,28 @@ public class Player
 
     }
 
-    boolean addPart( int part )
+    public Player( int sav, int inc )
     {
-        if( shipParts.contains( new Integer(part) ) )
-            return false;
+        income = inc;
+        bigMoney = sav;
+
+    }
+    
+    void addPartIncome( int part, int inc )
+    {
+        this.addPart( new Integer(part) );
+        this.addIncome( inc );
+    }
+    
+    void remPartIncome( int part, int inc )
+    {
+        this.removePart( part );
+        this.subSavings( inc );
+    }
+
+    void addPart( int part )
+    {
         shipParts.add( new Integer(part) );
-        return true;
     }
 
     boolean isPart( int part )
@@ -80,15 +96,9 @@ public class Player
         return shipParts.contains( new Integer(part) );
     }
 
-    boolean removePart( int part )
+    void removePart( int part )
     {
-        return shipParts.remove( new Integer(part) );
-    }
-
-    public Player( int sav, int inc )
-    {
-        income = inc;
-        bigMoney = sav;
+         shipParts.remove( new Integer(part) );
     }
 
     int nextDay() {
@@ -117,6 +127,11 @@ public class Player
     int getIncome()
     {
         return income;
+    }
+
+    int getSavings()
+    {
+        return bigMoney;
     }
 
     int addIncome( int gettinMoney )
