@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.til.Random;
+import java.util.Random;
 public class Player
 {
     final int MONEY_DEFAULT = 90000;
