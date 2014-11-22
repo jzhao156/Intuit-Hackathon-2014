@@ -22,15 +22,17 @@ ArrayList< Integer > bl;
 Event event;
 Player player;
 String[] optionStrings;
+
     public controller()
     {
         // do these initializatiosdf!!
-        events = event.getOptions();
-        toDoArray = event.getToDoArray();
+        
         bl = new ArrayList<Integer>();
         player = new Player();
         event = new Event( player );
         events = event.getOptions();
+        toDoArray = event.getToDoArray();
+        nextDay();
     }
 
 void nextDay()
@@ -55,6 +57,7 @@ void nextDay()
     } else {
         // TURN OFF PLACES WHERE OPTIONS WOULD BE.
         // THIS IS A RANDOM EVENT. NO OPTIONS!!11
+        optionStrings = (String[]) null;
     }
     
     // go to next screen, homepage
@@ -62,4 +65,4 @@ void nextDay()
 }
 temptoDo = eventVal.get( 
 if ( temptoDo.getIndex() >= options.size() )
-    // do not put options
+    // d`o not put options
