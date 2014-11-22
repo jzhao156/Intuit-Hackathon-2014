@@ -3,9 +3,9 @@ import java.util.*;
 public class Options
 {
   private ArrayList<String> str = new ArrayList<String>();
-  private ArrayList<Integer[]> vals = new ArrayList<Integer[]>();
+  private ArrayList<toDo> vals = new ArrayList<toDo>();
   
-  public Options(ArrayList<String> arg1, ArrayList<Integer[]> arg2)
+  public Options(ArrayList<String> arg1, ArrayList<toDo> arg2)
   {
     this.str = arg1;
     this.vals = arg2;
@@ -15,7 +15,7 @@ public class Options
   {
     return this.str;
   }
-  public ArrayList<Integer[]> getVals()
+  public ArrayList<toDo> getVals()
   {
     return this.vals;
   }
