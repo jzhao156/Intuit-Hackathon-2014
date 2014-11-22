@@ -77,6 +77,8 @@ public class Player
     
     void addPartIncome( int part, int inc )
     {
+        if (part == -1)
+            return;
         this.addPart( new Integer(part) );
         this.addIncome( inc );
     }
@@ -89,6 +91,9 @@ public class Player
 
     void addPart( int part )
     {
+        if (part == -1)
+            return;
+
         shipParts.add( new Integer(part) );
     }
 
