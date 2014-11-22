@@ -41,7 +41,7 @@ public class GameController extends WindowController implements ActionListener
         daysLeft = 20;
         shipPartsCnt = 0;
         
-        space_Background = new VisibleImage(getImage("Space.png"), 0, 0, canvas);
+        space_Background = new VisibleImage(getImage("Images/Space.png"), 0, 0, canvas);
         
         helpTextRect = new FilledRect(50, 40, 670, 250, canvas);
         helpTextRect.setColor(Color.WHITE);
@@ -100,11 +100,11 @@ public class GameController extends WindowController implements ActionListener
         lifeSupportText.hide();
         pressShopText.hide();
         
-        thrusterPic = new VisibleImage(getImage("Thruster.jpg"), 80, 60, canvas);
-        corePic = new VisibleImage(getImage("Core.jpg"), 110, 140, canvas);
-        wingsPic = new VisibleImage(getImage("Wings.jpg"), 90, 220, canvas);
-        cockpitPic = new VisibleImage(getImage("Cockpit.jpg"), 80, 300, canvas);
-        lifeSupportPic = new VisibleImage(getImage("Lifesupport.jpg"), 90, 380, canvas);
+        thrusterPic = new VisibleImage(getImage("Images/Thruster.jpg"), 80, 60, canvas);
+        corePic = new VisibleImage(getImage("Images/Core.jpg"), 110, 140, canvas);
+        wingsPic = new VisibleImage(getImage("Images/Wings.jpg"), 90, 220, canvas);
+        cockpitPic = new VisibleImage(getImage("Images/Cockpit.jpg"), 80, 300, canvas);
+        lifeSupportPic = new VisibleImage(getImage("Images/Lifesupport.jpg"), 90, 380, canvas);
         
         thrusterPic.hide();
         corePic.hide();
@@ -112,11 +112,11 @@ public class GameController extends WindowController implements ActionListener
         cockpitPic.hide();
         lifeSupportPic.hide();
         
-        purchasePic1 = new VisibleImage(getImage("Purchase.jpg"), 500, 60, canvas);
-        purchasePic2 = new VisibleImage(getImage("Purchase.jpg"), 500, 140, canvas);
-        purchasePic3 = new VisibleImage(getImage("Purchase.jpg"), 500, 220, canvas);
-        purchasePic4 = new VisibleImage(getImage("Purchase.jpg"), 500, 300, canvas);
-        purchasePic5 = new VisibleImage(getImage("Purchase.jpg"), 500, 380, canvas);
+        purchasePic1 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 60, canvas);
+        purchasePic2 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 140, canvas);
+        purchasePic3 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 220, canvas);
+        purchasePic4 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 300, canvas);
+        purchasePic5 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 380, canvas);
         
         purchasePic1.hide();
         purchasePic2.hide();
