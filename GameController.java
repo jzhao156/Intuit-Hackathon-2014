@@ -8,25 +8,30 @@ import objectdraw.*;
 
 public class GameController extends WindowController implements ActionListener
 {
-    public int daysLeft, moneyCnt;
+    public int daysLeft, moneyCnt, shipPartsCnt, incomeCnt;
     private JPanel bottomPanel = new JPanel(new FlowLayout());
     private JPanel topPanel = new JPanel(new FlowLayout());
     private JPanel imagePanel = new JPanel();
     private JButton shopButton;
     private JButton helpButton;
-    private JLabel days, money;
+    private JLabel days, money, parts, income;
     private Text helpText1, helpText2, helpText3, helpText4, helpText5, helpText6, helpText7, helpText8, helpText9;
+    private Text thrusterText, coreText, wingsText, cockpitText, lifeSupportText, pressShopText;
     
     private FilledRect prompt;
     private FilledRect option1, option2, option3, option4;
+    private FilledRect shopRect;
+    private VisibleImage purchasePic1,  purchasePic2, purchasePic3, purchasePic4, purchasePic5;
     
     private FilledRect helpTextRect;
     
     private Player player;
     
     private boolean curShowHelp = false;
+    private boolean curShowShop = false;
     
     private VisibleImage space_Background;
+    private VisibleImage thrusterPic, corePic, wingsPic, cockpitPic, lifeSupportPic;
     
     public void begin ()
     {
@@ -34,8 +39,10 @@ public class GameController extends WindowController implements ActionListener
         
         moneyCnt = player.bigMoney;
         daysLeft = 20;
+        shipPartsCnt = 0;
+        incomeCnt = player.income;
         
-        space_Background = new VisibleImage(getImage("Space.png"), 0, 0, canvas);
+        space_Background = new VisibleImage(getImage("Images/Space.png"), 0, 0, canvas);
         
         helpTextRect = new FilledRect(50, 40, 670, 250, canvas);
         helpTextRect.setColor(Color.WHITE);
@@ -65,6 +72,59 @@ public class GameController extends WindowController implements ActionListener
         option4 = new FilledRect(125, 420, 500, 70, canvas);
         option4.setColor(Color.WHITE);
         
+        shopRect = new FilledRect(50, 50, 650, 425, canvas);
+        shopRect.setColor(Color.WHITE);
+        
+        shopRect.hide();
+        
+        thrusterText = new Text("Thrusters       $200,000", 200, 80, canvas);
+        thrusterText.setFontSize(24);
+        thrusterText.setBold(true);
+        coreText = new Text("Nuclear Core  $200,000", 200, 160, canvas);
+        coreText.setFontSize(24);
+        coreText.setBold(true);
+        wingsText = new Text("Jet Wings       $200,000", 200, 240, canvas);
+        wingsText.setFontSize(24);
+        wingsText.setBold(true);
+        cockpitText = new Text( "Cockpit          $200,000", 200, 320, canvas);
+        cockpitText.setFontSize(24);
+        cockpitText.setBold(true);
+        lifeSupportText = new Text("Life Support   $200,000", 200, 400, canvas);
+        lifeSupportText.setFontSize(24);
+        lifeSupportText.setBold(true);
+        pressShopText = new Text("Press Shop to return to the game", 250, 460, canvas);
+        
+        thrusterText.hide();
+        coreText.hide();
+        wingsText.hide();
+        cockpitText.hide();
+        lifeSupportText.hide();
+        pressShopText.hide();
+        
+        thrusterPic = new VisibleImage(getImage("Images/Thruster.jpg"), 80, 60, canvas);
+        corePic = new VisibleImage(getImage("Images/Core.jpg"), 110, 140, canvas);
+        wingsPic = new VisibleImage(getImage("Images/Wings.jpg"), 90, 220, canvas);
+        cockpitPic = new VisibleImage(getImage("Images/Cockpit.jpg"), 80, 300, canvas);
+        lifeSupportPic = new VisibleImage(getImage("Images/Lifesupport.jpg"), 90, 380, canvas);
+        
+        thrusterPic.hide();
+        corePic.hide();
+        wingsPic.hide();
+        cockpitPic.hide();
+        lifeSupportPic.hide();
+        
+        purchasePic1 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 60, canvas);
+        purchasePic2 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 140, canvas);
+        purchasePic3 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 220, canvas);
+        purchasePic4 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 300, canvas);
+        purchasePic5 = new VisibleImage(getImage("Images/Purchase.jpg"), 500, 380, canvas);
+        
+        purchasePic1.hide();
+        purchasePic2.hide();
+        purchasePic3.hide();
+        purchasePic4.hide();
+        purchasePic5.hide();
+        
         shopButton = new JButton("Shop");
         helpButton = new JButton("Help");
         
@@ -74,17 +134,24 @@ public class GameController extends WindowController implements ActionListener
         shopButton.setPreferredSize( new Dimension(300, 75));
         helpButton.setPreferredSize( new Dimension(300, 75));
         
-        days = new JLabel("Days left: " + daysLeft + "        ");
+        days = new JLabel("Days left: " + daysLeft + "  ");
+        parts = new JLabel("Ship Parts: " + shipPartsCnt + "/5  ");
+        income = new JLabel("Income: " + "$" + incomeCnt + "/turn  ");
         money = new JLabel( "Money: " + "$" + moneyCnt);
         
-        days.setFont(days.getFont().deriveFont(24.0f));
+        days.setFont(days.getFont().deriveFont(18.0f));
         days.setForeground(Color.red);
-        money.setFont(money.getFont().deriveFont(24.0f));
+        parts.setFont(parts.getFont().deriveFont(18.0f));
+        income.setFont(income.getFont().deriveFont(18.0f));
+        income.setForeground(Color.green);
+        money.setFont(money.getFont().deriveFont(18.0f));
         money.setForeground(Color.green);
         
         bottomPanel.add(shopButton);
         bottomPanel.add(helpButton);
         topPanel.add(days);
+        topPanel.add(parts);
+        topPanel.add(income);
         topPanel.add(money);
         
         add(topPanel, BorderLayout.NORTH);
@@ -101,6 +168,7 @@ public class GameController extends WindowController implements ActionListener
         //TODO
         if (evt.getSource() == shopButton)
         {
+            shopAction();
         }
         if (evt.getSource() == helpButton)
         {
@@ -108,9 +176,91 @@ public class GameController extends WindowController implements ActionListener
         }
     }
     
+    public void shopAction()
+    {
+        if (curShowShop)
+        {
+            // Hide the shop and go back to main menu
+            shopRect.hide();
+            thrusterText.hide();
+            coreText.hide();
+            wingsText.hide();
+            cockpitText.hide();
+            lifeSupportText.hide();
+            purchasePic1.hide();
+            purchasePic2.hide();
+            purchasePic3.hide();
+            purchasePic4.hide();
+            purchasePic5.hide();
+            thrusterPic.hide();
+            corePic.hide();
+            wingsPic.hide();
+            cockpitPic.hide();
+            lifeSupportPic.hide();
+            pressShopText.hide();
+            
+            if(prompt.isHidden()) { prompt.show(); };
+            if(option1.isHidden()) { option1.show(); };
+            if(option2.isHidden()) { option2.show(); };
+            if(option3.isHidden()) { option3.show(); };
+            if(option4.isHidden()) { option4.show(); };
+            
+            curShowShop = false;
+        }
+        else
+        {
+            // Show the shop, check if coming from help or main menu
+            if(curShowHelp)
+            {
+                helpText1.hide();
+                helpText2.hide();
+                helpText3.hide();
+                helpText4.hide();
+                helpText5.hide();
+                helpText6.hide();
+                helpText7.hide();
+                helpText8.hide();
+                helpText9.hide();
+                helpTextRect.hide();
+                
+                curShowHelp = false;
+            }
+            else
+            {
+                if(!prompt.isHidden()) { prompt.hide(); };
+                if(!option1.isHidden()) { option1.hide(); };
+                if(!option2.isHidden()) { option2.hide(); };
+                if(!option3.isHidden()) { option3.hide(); };
+                if(!option4.isHidden()) { option4.hide(); };
+            }
+            // Now show the shop
+            shopRect.show();
+            thrusterText.show();
+            coreText.show();
+            wingsText.show();
+            cockpitText.show();
+            lifeSupportText.show();
+            pressShopText.show();
+            purchasePic1.show();
+            purchasePic2.show();
+            purchasePic3.show();
+            purchasePic4.show();
+            purchasePic5.show();
+            thrusterPic.show();
+            corePic.show();
+            wingsPic.show();
+            cockpitPic.show();
+            lifeSupportPic.show();
+            
+            curShowShop = true;
+        }
+    }
+    
     public void helpAction()
     {
-        if(curShowHelp) {
+        if(curShowHelp)
+        {
+            // Shop currently being shown and needs to be hidden
             helpText1.hide();
             helpText2.hide();
             helpText3.hide();
@@ -131,6 +281,36 @@ public class GameController extends WindowController implements ActionListener
             curShowHelp = false;
         }
         else {
+            // Shop not being displayed and needs to be shown, first check if coming from
+            // main menu or the shop screen
+            if (curShowShop)
+            {
+                shopRect.hide();
+                thrusterText.hide();
+                coreText.hide();
+                wingsText.hide();
+                cockpitText.hide();
+                lifeSupportText.hide();
+                pressShopText.hide();
+                purchasePic1.hide();
+                purchasePic2.hide();
+                purchasePic3.hide();
+                purchasePic4.hide();
+                purchasePic5.hide();
+                thrusterPic.hide();
+                corePic.hide();
+                wingsPic.hide();
+                cockpitPic.hide();
+                lifeSupportPic.hide();
+                curShowShop = false;
+            }
+            if(!prompt.isHidden()) { prompt.hide(); };
+            if(!option1.isHidden()) { option1.hide(); };
+            if(!option2.isHidden()) { option2.hide(); };
+            if(!option3.isHidden()) { option3.hide(); };
+            if(!option4.isHidden()) { option4.hide(); };
+            
+            // Now show help
             helpTextRect.show();
             helpText1.show();
             helpText2.show();
@@ -141,12 +321,6 @@ public class GameController extends WindowController implements ActionListener
             helpText7.show();
             helpText8.show();
             helpText9.show();
-            
-            if(!prompt.isHidden()) { prompt.hide(); };
-            if(!option1.isHidden()) { option1.hide(); };
-            if(!option2.isHidden()) { option2.hide(); };
-            if(!option3.isHidden()) { option3.hide(); };
-            if(!option4.isHidden()) { option4.hide(); };
             
             curShowHelp = true;
         }
