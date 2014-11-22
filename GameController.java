@@ -8,13 +8,13 @@ import objectdraw.*;
 
 public class GameController extends WindowController implements ActionListener
 {
-    public int daysLeft, moneyCnt, shipPartsCnt;
+    public int daysLeft, moneyCnt, shipPartsCnt, incomeCnt;
     private JPanel bottomPanel = new JPanel(new FlowLayout());
     private JPanel topPanel = new JPanel(new FlowLayout());
     private JPanel imagePanel = new JPanel();
     private JButton shopButton;
     private JButton helpButton;
-    private JLabel days, money, parts;
+    private JLabel days, money, parts, income;
     private Text helpText1, helpText2, helpText3, helpText4, helpText5, helpText6, helpText7, helpText8, helpText9;
     private Text thrusterText, coreText, wingsText, cockpitText, lifeSupportText, pressShopText;
     
@@ -40,6 +40,7 @@ public class GameController extends WindowController implements ActionListener
         moneyCnt = player.bigMoney;
         daysLeft = 20;
         shipPartsCnt = 0;
+        incomeCnt = player.income;
         
         space_Background = new VisibleImage(getImage("Images/Space.png"), 0, 0, canvas);
         
@@ -133,20 +134,24 @@ public class GameController extends WindowController implements ActionListener
         shopButton.setPreferredSize( new Dimension(300, 75));
         helpButton.setPreferredSize( new Dimension(300, 75));
         
-        days = new JLabel("Days left: " + daysLeft + "    ");
-        parts = new JLabel("Ship Parts: " + shipPartsCnt + "/5    ");
+        days = new JLabel("Days left: " + daysLeft + "  ");
+        parts = new JLabel("Ship Parts: " + shipPartsCnt + "/5  ");
+        income = new JLabel("Income: " + "$" + incomeCnt + "/turn  ");
         money = new JLabel( "Money: " + "$" + moneyCnt);
         
-        days.setFont(days.getFont().deriveFont(24.0f));
+        days.setFont(days.getFont().deriveFont(18.0f));
         days.setForeground(Color.red);
-        parts.setFont(parts.getFont().deriveFont(24.0f));
-        money.setFont(money.getFont().deriveFont(24.0f));
+        parts.setFont(parts.getFont().deriveFont(18.0f));
+        income.setFont(income.getFont().deriveFont(18.0f));
+        income.setForeground(Color.green);
+        money.setFont(money.getFont().deriveFont(18.0f));
         money.setForeground(Color.green);
         
         bottomPanel.add(shopButton);
         bottomPanel.add(helpButton);
         topPanel.add(days);
         topPanel.add(parts);
+        topPanel.add(income);
         topPanel.add(money);
         
         add(topPanel, BorderLayout.NORTH);
