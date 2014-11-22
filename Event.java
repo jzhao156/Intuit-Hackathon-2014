@@ -4,8 +4,8 @@ public class Event
 {
   private ArrayList<String> startPrompt= new ArrayList<String>();
   private ArrayList<String> prompts = new ArrayList<String>();
-  private ArrayList<Options> options= new ArrayList<Options>();
-  private ArrayList<RandomEvents> events= new ArrayList<RandomEvents>();
+  private ArrayList<xxActioNxx> options= new ArrayList<xxActioNxx>();
+  
   //cockpit,nuclear core, wings, life support, thrusters are the parts
   
   public Event(Player p)
@@ -358,31 +358,41 @@ public class Event
     ////////////////////////////////RANDOM-GEN EVENTS//////////////////////////////////
     String rand0 = ("Nothing interesting happens today.");
     toDo ev0 = new toDo(15,-1,0,0);
+    ArrayList<toDo> list0 = new ArrayList<toDo>();
+    list0.add(ev0);
     
     String rand1 = ("The government realizes it no longer needs the military since the world is ending. This frees up"+
                " enough excess budget that the government gifts you $150,000.");
     toDo ev1 = new toDo(16,-1,150000,0);
+    ArrayList<toDo> list1 = new ArrayList<toDo>();
+    list1.add(ev1);
     
     String rand2 = ("The riots induced by the impending apocalypse causes damage to your assets. You pay $50,000 to "+
                "replace them");
-    toDo ev2 = new toDo(17,-1,-50000,0); 
+    toDo ev2 = new toDo(17,-1,-50000,0);
+    ArrayList<toDo> list2 = new ArrayList<toDo>();
+    list2.add(ev2);
     
     String rand3 =("Global stocks crash. A bunch of complex math results in your daily income being reduced by $5,000");
     toDo ev3 = new toDo(18,-1,0,-5000);
+    ArrayList<toDo> list3 = new ArrayList<toDo>();
+    list3.add(ev3);
     
     String rand4 = ("You decide to sell your old collection of video games. Apparently they're worth $100,000");
     toDo ev4 = new toDo(19,-1,100000,0);
+    ArrayList<toDo> list4 = new ArrayList<toDo>();
+    list4.add(ev4);
     
-    RandomEvents event0 = new RandomEvents(rand0,ev0);
-    RandomEvents event1 = new RandomEvents(rand1,ev1);
-    RandomEvents event2 = new RandomEvents(rand2,ev2);
-    RandomEvents event3 = new RandomEvents(rand3,ev3);
-    RandomEvents event4 = new RandomEvents(rand4,ev4);
-    events.add(event0);
-    events.add(event1);
-    events.add(event2);
-    events.add(event3);
-    events.add(event4);
+    RandomEvents event0 = new RandomEvents(rand0,list0);
+    RandomEvents event1 = new RandomEvents(rand1,list1);
+    RandomEvents event2 = new RandomEvents(rand2,list2);
+    RandomEvents event3 = new RandomEvents(rand3,list3);
+    RandomEvents event4 = new RandomEvents(rand4,list4);
+    options.add(event0);
+    options.add(event1);
+    options.add(event2);
+    options.add(event3);
+    options.add(event4);
                  
   }
   
@@ -390,16 +400,9 @@ public class Event
   {
     return prompts.get(index);
   }
-  public Options getOptions(int index)
+  public xxActioNxx getOptions(int index)
   {
     return options.get(index);
-  }
-  public RandomEvents getEvent()
-  {
-    int size = events.size();
-    Random generator = new Random();
-    int rand = generator.nextInt(5);
-    return events.get(rand);
   }
   public static void main(String[] args)
   {
