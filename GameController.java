@@ -8,6 +8,13 @@ import objectdraw.*;
 
 public class GameController extends WindowController implements ActionListener
 {
+    final int NP = -1;
+    final int CP = 0;
+    final int NC = 1;
+    final int WS = 2;
+    final int LS = 3;
+    final int TH = 4;
+    
     ArrayList< toDo > toDoArray;
     ArrayList< Integer > bl;
     Event event;
@@ -225,9 +232,10 @@ public class GameController extends WindowController implements ActionListener
     // add global vars
     public void nextDay()
     {
-        // Job
-        player.addSavings(player.getIncome());
-        
+        option1wasHidden = false;
+        option2wasHidden = false;
+        option3wasHidden = false;
+        option4wasHidden = false;
         if (daysLeft != 20)
         {
             player.addPart( pooper.getPart() );
@@ -236,6 +244,19 @@ public class GameController extends WindowController implements ActionListener
             player.addSavings( pooper.getDelSav() );
             System.out.println("New savings is " + player.getSavings());
         }
+        
+        if (player.getSavings() < 0 || daysLeft == 0)
+        {
+            days.setText("Days left: " + daysLeft + " ");
+            parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+            income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+            money.setText( "Money: " + "$" + player.getSavings());
+            loseGame();
+            return;
+        }
+        
+        // Job
+        player.addSavings(player.getIncome());
         
         // If possible, get options
         int temp = generator.nextInt(20);
@@ -255,50 +276,65 @@ public class GameController extends WindowController implements ActionListener
         if (promptText1 != null)
         {
             promptText1.hide();
+            promptText1 = null;
         }
         if (promptText2 != null)
         {
             promptText2.hide();
+            promptText2 = null;
+
         }
         if (promptText3 != null)
         {
             promptText3.hide();
+            promptText3 = null;
+
         }
         if (promptText4 != null)
         {
             promptText4.hide();
+            promptText4 = null;
+
         }
         if (option1text1 != null)
         {
             option1text1.hide();
+            option1text1 = null;
         }
         if (option1text2 != null)
         {
             option1text2.hide();
+            option1text2 = null;
         }
         if (option2text1 != null)
         {
             option2text1.hide();
+            option2text1 = null;
         }
         if (option2text2 != null)
         {
             option2text2.hide();
+            option2text2 = null;
         }
         if (option3text1 != null)
         {
             option3text1.hide();
+            option3text1 = null;
         }
         if (option3text2 != null)
         {
             option3text2.hide();
+            option3text2 = null;
         }
         if (option4text1 != null)
         {
             option4text1.hide();
+            option4text1 = null;
         }
         if (option4text2 != null)
         {
             option4text2.hide();
+            option4text2 = null;
         }
         if (option1.isHidden())
         {
@@ -430,7 +466,7 @@ public class GameController extends WindowController implements ActionListener
         }
         
         days.setText("Days left: " + daysLeft + " ");
-        parts.setText("Ship Parts: " + player.shipParts.size() + "/5 ");
+        parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
         income.setText("Income: " + "$" + player.getIncome() + "/turn ");
         money.setText( "Money: " + "$" + player.getSavings());
         
@@ -554,17 +590,57 @@ public class GameController extends WindowController implements ActionListener
             }
             // Now show the shop
             shopRect.show();
+            if (player.isPart(TH))
+            {
+                thrusterText.setText("Thrusters -SOLD-");
+                purchasePic1.hide();
+            }
+            else
+            {
+                purchasePic1.show();
+            }
+            if (player.isPart(NC))
+            {
+                coreText.setText("Nuclear Core -SOLD-");
+                purchasePic2.hide();
+            }
+            else
+            {
+                purchasePic2.show();
+            }
+            if (player.isPart(WS))
+            {
+                wingsText.setText("Jet Wings -SOLD-");
+                purchasePic3.hide();
+            }
+            else
+            {
+                purchasePic3.show();
+            }
+            if (player.isPart(CP))
+            {
+                cockpitText.setText("Cockpit -SOLD-");
+                purchasePic4.hide();
+            }
+            else
+            {
+                purchasePic4.show();
+            }
+            if (player.isPart(LS))
+            {
+                lifeSupportText.setText("Life Support -SOLD-");
+                purchasePic5.hide();
+            }
+            else
+            {
+                purchasePic5.show();
+            }
             thrusterText.show();
             coreText.show();
             wingsText.show();
             cockpitText.show();
             lifeSupportText.show();
             pressShopText.show();
-            purchasePic1.show();
-            purchasePic2.show();
-            purchasePic3.show();
-            purchasePic4.show();
-            purchasePic5.show();
             thrusterPic.show();
             corePic.show();
             wingsPic.show();
@@ -682,12 +758,16 @@ public class GameController extends WindowController implements ActionListener
     {
         losePic = new VisibleImage(getImage("images/LoseScreen.jpg"), 0 ,0, canvas);
         gameFinished = true;
+        player = new Player();
+        daysLeft = 20;
     }
     
     public void winGame()
     {
         winPic = new VisibleImage(getImage("images/WinScreen.jpg"), 0, 0, canvas);
         gameFinished = true;
+        player = new Player();
+        daysLeft = 20;
     }
     
     public void onMouseClick(Location mousePosition)
@@ -704,10 +784,81 @@ public class GameController extends WindowController implements ActionListener
             {
                 winPic.hide();
             }
+            nextDay();
             return;
-            // TODO reset the game properties
             
         }
+        
+        if (curShowShop && purchasePic1.contains(mousePosition) && !purchasePic1.isHidden())
+        {
+            if (player.getSavings() > 200000)
+            {
+                player.addPart(TH);
+                player.addSavings(-200000);
+                money.setText( "Money: " + "$" + player.getSavings());
+                parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                curShowShop = false;
+                shopAction();
+                return;
+            }
+        }
+        
+        if (curShowShop && purchasePic2.contains(mousePosition) && !purchasePic2.isHidden())
+        {
+            if (player.getSavings() > 200000)
+            {
+                player.addPart(NC);
+                player.addSavings(-200000);
+                money.setText( "Money: " + "$" + player.getSavings());
+                parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                curShowShop = false;
+                shopAction();
+                return;
+            }
+        }
+        
+        if (curShowShop && purchasePic3.contains(mousePosition) && !purchasePic3.isHidden())
+        {
+            if (player.getSavings() > 200000)
+            {
+                player.addPart(WS);
+                player.addSavings(-200000);
+                money.setText( "Money: " + "$" + player.getSavings());
+                parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                curShowShop = false;
+                shopAction();
+                return;
+            }
+        }
+        
+        if (curShowShop && purchasePic4.contains(mousePosition) && !purchasePic4.isHidden())
+        {
+            if (player.getSavings() > 200000)
+            {
+                player.addPart(CP);
+                player.addSavings(-200000);
+                money.setText( "Money: " + "$" + player.getSavings());
+                parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                curShowShop = false;
+                shopAction();
+                return;
+            }
+        }
+        
+        if (curShowShop && purchasePic5.contains(mousePosition) && !purchasePic5.isHidden())
+        {
+            if (player.getSavings() > 200000)
+            {
+                player.addPart(LS);
+                player.addSavings(-200000);
+                money.setText( "Money: " + "$" + player.getSavings());
+                parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                curShowShop = false;
+                shopAction();
+                return;
+            }
+        }
+        
         if (option1.isHidden() && option2.isHidden() && option3.isHidden() && option4.isHidden() && !curShowShop && !curShowHelp)
         {
             ArrayList<toDo> todo = events.getToDoArray();
