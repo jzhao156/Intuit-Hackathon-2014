@@ -19,7 +19,7 @@ public class GameController extends JApplet implements ActionListener//, Mouseli
     public void init ()
     {
         ImageIcon x = new ImageIcon(this.getClass().getResource("testImage.jpg"));
-        JLabel test = new JLabel(x);
+        JLabel image = new JLabel(x);
         
         shopButton = new JButton("Shop");
         helpButton = new JButton("Help");
@@ -30,10 +30,13 @@ public class GameController extends JApplet implements ActionListener//, Mouseli
         shopButton.setPreferredSize( new Dimension(300, 75));
         helpButton.setPreferredSize( new Dimension(300, 75));
         
-        days = new JLabel("days left: " + daysLeft);
-        money = new JLabel( "money" + "$" + moneyCnt);
+        days = new JLabel("Days left: " + daysLeft + "   ");
+        money = new JLabel( "Money: " + "$" + moneyCnt);
         
-        bottomPanel.add(test);
+        days.setFont(days.getFont().deriveFont(36.0f));
+        money.setFont(money.getFont().deriveFont(36.0f));
+        
+        bottomPanel.add(image);
         bottomPanel.add(shopButton);
         bottomPanel.add(helpButton);
         topPanel.add(days);
