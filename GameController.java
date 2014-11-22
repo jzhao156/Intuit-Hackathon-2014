@@ -240,9 +240,16 @@ public class GameController extends WindowController implements ActionListener
         {
             player.addPart( pooper.getPart() );
             player.addIncome( pooper.getDelInc() );
-            System.out.println("New income is " + player.getIncome());
             player.addSavings( pooper.getDelSav() );
-            System.out.println("New savings is " + player.getSavings());
+        }
+        if (player.getShipSize() == 5)
+        {
+            days.setText("Days left: " + daysLeft + " ");
+            parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+            income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+            money.setText( "Money: " + "$" + player.getSavings());
+            winGame();
+            return;
         }
         
         if (player.getSavings() < 0 || daysLeft == 0)
@@ -435,8 +442,6 @@ public class GameController extends WindowController implements ActionListener
             option4wasHidden = true;
         }
         
-        System.out.println(stringPrompt);
-        
         ArrayList<String> separated_strings = wrapText(stringPrompt);
         
         for( int i = 0; i < separated_strings.size(); i++ )
@@ -446,22 +451,26 @@ public class GameController extends WindowController implements ActionListener
             {
                 promptText1 = new Text(separated_strings.get(i), 130, 35, canvas);
                 promptText1.setBold(true);
+                promptText1.setFontSize(24);
             }
             if (i == 1)
             // set second
             {
-                promptText2 = new Text(separated_strings.get(i), 130, 55, canvas);
+                promptText2 = new Text(separated_strings.get(i), 130, 70, canvas);
                 promptText2.setBold(true);
+                promptText2.setFontSize(24);
             }
             if (i == 2)
             {
-                promptText3 = new Text(separated_strings.get(i), 130, 75, canvas);
+                promptText3 = new Text(separated_strings.get(i), 130, 105, canvas);
                 promptText3.setBold(true);
+                promptText3.setFontSize(24);
             }
             if (i == 3)
             {
-                promptText4 = new Text(separated_strings.get(i), 130, 95, canvas);
+                promptText4 = new Text(separated_strings.get(i), 130, 140, canvas);
                 promptText4.setBold(true);
+                promptText4.setFontSize(24);
             }
         }
         
@@ -784,17 +793,32 @@ public class GameController extends WindowController implements ActionListener
             {
                 winPic.hide();
             }
-            nextDay();
+            topPanel.remove(days);
+            topPanel.remove(parts);
+            topPanel.remove(income);
+            topPanel.remove(money);
+            bottomPanel.remove(shopButton);
+            bottomPanel.remove(helpButton);
+            begin();
             return;
             
         }
         
         if (curShowShop && purchasePic1.contains(mousePosition) && !purchasePic1.isHidden())
         {
-            if (player.getSavings() > 200000)
+            if (player.getSavings() >= 200000)
             {
                 player.addPart(TH);
                 player.addSavings(-200000);
+                if (player.getShipSize() == 5)
+                {
+                    days.setText("Days left: " + daysLeft + " ");
+                    parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                    income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+                    money.setText( "Money: " + "$" + player.getSavings());
+                    winGame();
+                    return;
+                }
                 money.setText( "Money: " + "$" + player.getSavings());
                 parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
                 curShowShop = false;
@@ -805,10 +829,19 @@ public class GameController extends WindowController implements ActionListener
         
         if (curShowShop && purchasePic2.contains(mousePosition) && !purchasePic2.isHidden())
         {
-            if (player.getSavings() > 200000)
+            if (player.getSavings() >= 200000)
             {
                 player.addPart(NC);
                 player.addSavings(-200000);
+                if (player.getShipSize() == 5)
+                {
+                    days.setText("Days left: " + daysLeft + " ");
+                    parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                    income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+                    money.setText( "Money: " + "$" + player.getSavings());
+                    winGame();
+                    return;
+                }
                 money.setText( "Money: " + "$" + player.getSavings());
                 parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
                 curShowShop = false;
@@ -819,10 +852,19 @@ public class GameController extends WindowController implements ActionListener
         
         if (curShowShop && purchasePic3.contains(mousePosition) && !purchasePic3.isHidden())
         {
-            if (player.getSavings() > 200000)
+            if (player.getSavings() >= 200000)
             {
                 player.addPart(WS);
                 player.addSavings(-200000);
+                if (player.getShipSize() == 5)
+                {
+                    days.setText("Days left: " + daysLeft + " ");
+                    parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                    income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+                    money.setText( "Money: " + "$" + player.getSavings());
+                    winGame();
+                    return;
+                }
                 money.setText( "Money: " + "$" + player.getSavings());
                 parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
                 curShowShop = false;
@@ -833,10 +875,19 @@ public class GameController extends WindowController implements ActionListener
         
         if (curShowShop && purchasePic4.contains(mousePosition) && !purchasePic4.isHidden())
         {
-            if (player.getSavings() > 200000)
+            if (player.getSavings() >= 200000)
             {
                 player.addPart(CP);
                 player.addSavings(-200000);
+                if (player.getShipSize() == 5)
+                {
+                    days.setText("Days left: " + daysLeft + " ");
+                    parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                    income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+                    money.setText( "Money: " + "$" + player.getSavings());
+                    winGame();
+                    return;
+                }
                 money.setText( "Money: " + "$" + player.getSavings());
                 parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
                 curShowShop = false;
@@ -847,10 +898,19 @@ public class GameController extends WindowController implements ActionListener
         
         if (curShowShop && purchasePic5.contains(mousePosition) && !purchasePic5.isHidden())
         {
-            if (player.getSavings() > 200000)
+            if (player.getSavings() >= 200000)
             {
                 player.addPart(LS);
                 player.addSavings(-200000);
+                if (player.getShipSize() == 5)
+                {
+                    days.setText("Days left: " + daysLeft + " ");
+                    parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
+                    income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+                    money.setText( "Money: " + "$" + player.getSavings());
+                    winGame();
+                    return;
+                }
                 money.setText( "Money: " + "$" + player.getSavings());
                 parts.setText("Ship Parts: " + player.getShipSize() + "/5 ");
                 curShowShop = false;
