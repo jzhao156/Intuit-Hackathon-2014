@@ -46,11 +46,11 @@ public class Player
     }
 
     boolean isPart(int part, int val) {
-        return shipParts[part].contains( Integer(val) );
+        return shipParts[part].contains( new Integer(val) );
     }
     // true if there, false if not there
     boolean removePart(int part, int val) {
-        return shipParts[part].remove( Integer(val) );
+        return shipParts[part].remove( new Integer(val) );
     }
 
     int nextDay() {
