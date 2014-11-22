@@ -16,6 +16,8 @@ public class GameController extends WindowController implements ActionListener
     
     public final int NUM_CHAR_PER_LINE = 73;
     
+    int index = 0;
+    
     // Used for the display labels
     public int daysLeft, moneyCnt, shipPartsCnt, incomeCnt;
     // Contains help and shop buttons
@@ -53,6 +55,8 @@ public class GameController extends WindowController implements ActionListener
     // Whether or not the game has been finished
     private boolean gameFinished = false;
     
+    private boolean option1wasHidden, option2wasHidden, option3wasHidden, option4wasHidden;
+    
     // Background of the game
     private VisibleImage space_Background;
     // Pictures of each item in the shop
@@ -66,7 +70,10 @@ public class GameController extends WindowController implements ActionListener
 
     //Random number generator
     private Random generator = new Random();
-
+    
+    xxActioNxx events;
+    
+    toDo pooper;
     
     public void begin ()
     {
@@ -196,9 +203,10 @@ public class GameController extends WindowController implements ActionListener
         add(bottomPanel, BorderLayout.SOUTH);
         
         this.validate();
-        
         // Only display shop things (for now anyway)
+        nextDay();
         helpAction();
+        
         
     }
     
@@ -217,6 +225,18 @@ public class GameController extends WindowController implements ActionListener
     // add global vars
     public void nextDay()
     {
+        // Job
+        player.addSavings(player.getIncome());
+        
+        if (daysLeft != 20)
+        {
+            player.addPart( pooper.getPart() );
+            player.addIncome( pooper.getDelInc() );
+            System.out.println("New income is " + player.getIncome());
+            player.addSavings( pooper.getDelSav() );
+            System.out.println("New savings is " + player.getSavings());
+        }
+        
         // If possible, get options
         int temp = generator.nextInt(20);
         while (bl.contains (new Integer(temp)))
@@ -224,12 +244,78 @@ public class GameController extends WindowController implements ActionListener
             temp = generator.nextInt(20);
         }
         
-        xxActioNxx events = event.getOptions(temp);
+        events = event.getOptions(temp);
         
         // Get prompt string here
         String stringPrompt = "";
         
         bl.add( new Integer(temp) );
+        
+        // Get rid of previous days prompt and options
+        if (promptText1 != null)
+        {
+            promptText1.hide();
+        }
+        if (promptText2 != null)
+        {
+            promptText2.hide();
+        }
+        if (promptText3 != null)
+        {
+            promptText3.hide();
+        }
+        if (promptText4 != null)
+        {
+            promptText4.hide();
+        }
+        if (option1text1 != null)
+        {
+            option1text1.hide();
+        }
+        if (option1text2 != null)
+        {
+            option1text2.hide();
+        }
+        if (option2text1 != null)
+        {
+            option2text1.hide();
+        }
+        if (option2text2 != null)
+        {
+            option2text2.hide();
+        }
+        if (option3text1 != null)
+        {
+            option3text1.hide();
+        }
+        if (option3text2 != null)
+        {
+            option3text2.hide();
+        }
+        if (option4text1 != null)
+        {
+            option4text1.hide();
+        }
+        if (option4text2 != null)
+        {
+            option4text2.hide();
+        }
+        if (option1.isHidden())
+        {
+            option1.show();
+        }
+        if (option2.isHidden())
+        {
+            option2.show();
+        }
+        if (option3.isHidden())
+        {
+            option3.show();
+        }
+        if (option4.isHidden())
+        {
+            option4.show();
+        }
         
         if( events instanceof Options )
         {
@@ -255,7 +341,7 @@ public class GameController extends WindowController implements ActionListener
                     option2text1 = new Text(optionSeparated.get(0), 130, 250, canvas);
                     if (optionSeparated.size() > 1)
                     {
-                        option1text2 = new Text(optionSeparated.get(1), 130, 270, canvas);
+                        option2text2 = new Text(optionSeparated.get(1), 130, 270, canvas);
                     }
                 }
                 // Set third option
@@ -264,7 +350,7 @@ public class GameController extends WindowController implements ActionListener
                     option3text1 = new Text(optionSeparated.get(0), 130, 335, canvas);
                     if (optionSeparated.size() > 1)
                     {
-                        option1text2 = new Text(optionSeparated.get(1), 130, 355, canvas);
+                        option3text2 = new Text(optionSeparated.get(1), 130, 355, canvas);
                     }
                 }
                 // Set fourth option
@@ -273,15 +359,44 @@ public class GameController extends WindowController implements ActionListener
                     option4text1 = new Text(optionSeparated.get(0), 130, 420, canvas);
                     if (optionSeparated.size() > 1)
                     {
-                        option1text2 = new Text(optionSeparated.get(1), 130, 440, canvas);
+                        option4text2 = new Text(optionSeparated.get(1), 130, 440, canvas);
                     }
                 }
             }
+
+            if(al.size() == 1) {
+                option2.hide();
+                option3.hide();
+                option4.hide();
+                option2wasHidden = true;
+                option3wasHidden = true;
+                option4wasHidden = true;
+            }
+            else if(al.size() == 2) {
+                option3.hide();
+                option4.hide();
+                option3wasHidden = true;
+                option4wasHidden = true;
+            }
+            else if(al.size() == 3) {
+                option4.hide();
+                option4wasHidden = true;
+            }
+            else { }
             
-        } else
+        }
+        else
         {
             stringPrompt = event.getPrompt( temp );
             // remove rects covering options
+            option1.hide();
+            option2.hide();
+            option3.hide();
+            option4.hide();
+            option1wasHidden = true;
+            option2wasHidden = true;
+            option3wasHidden = true;
+            option4wasHidden = true;
         }
         
         System.out.println(stringPrompt);
@@ -313,6 +428,14 @@ public class GameController extends WindowController implements ActionListener
                 promptText4.setBold(true);
             }
         }
+        
+        days.setText("Days left: " + daysLeft + " ");
+        parts.setText("Ship Parts: " + player.shipParts.size() + "/5 ");
+        income.setText("Income: " + "$" + player.getIncome() + "/turn ");
+        money.setText( "Money: " + "$" + player.getSavings());
+        
+        daysLeft--;
+
     }
     
     public ArrayList<String> wrapText(String input)
@@ -370,10 +493,23 @@ public class GameController extends WindowController implements ActionListener
             pressShopText.hide();
             
             if(prompt.isHidden()) { prompt.show(); };
-            if(option1.isHidden()) { option1.show(); };
-            if(option2.isHidden()) { option2.show(); };
-            if(option3.isHidden()) { option3.show(); };
-            if(option4.isHidden()) { option4.show(); };
+            if(!option1wasHidden) { option1.show(); };
+            if(!option2wasHidden) { option2.show(); };
+            if(!option3wasHidden) { option3.show(); };
+            if(!option4wasHidden) { option4.show(); };
+            
+            if(promptText1 != null && promptText1.isHidden()) {promptText1.show();};
+            if(promptText2 != null && promptText2.isHidden()) {promptText2.show();};
+            if(promptText3 != null && promptText3.isHidden()) {promptText3.show();};
+            if(promptText4 != null && promptText4.isHidden()) {promptText4.show();};
+            if(option1text1 != null && option1text1.isHidden()) {option1text1.show();};
+            if(option1text2 != null && option1text2.isHidden()) {option1text2.show();};
+            if(option2text1 != null && option2text1.isHidden()) {option2text1.show();};
+            if(option2text2 != null && option2text2.isHidden()) {option2text2.show();};
+            if(option3text1 != null && option3text1.isHidden()) {option3text1.show();};
+            if(option3text2 != null && option3text2.isHidden()) {option3text2.show();};
+            if(option4text1 != null && option4text1.isHidden()) {option4text1.show();};
+            if(option4text2 != null && option4text2.isHidden()) {option4text2.show();};
             
             curShowShop = false;
         }
@@ -402,6 +538,19 @@ public class GameController extends WindowController implements ActionListener
                 if(!option2.isHidden()) { option2.hide(); };
                 if(!option3.isHidden()) { option3.hide(); };
                 if(!option4.isHidden()) { option4.hide(); };
+                
+                if(promptText1 != null && !promptText1.isHidden()) {promptText1.hide();};
+                if(promptText2 != null && !promptText2.isHidden()) {promptText2.hide();};
+                if(promptText3 != null && !promptText3.isHidden()) {promptText3.hide();};
+                if(promptText4 != null && !promptText4.isHidden()) {promptText4.hide();};
+                if(option1text1 != null && !option1text1.isHidden()) {option1text1.hide();};
+                if(option1text2 != null && !option1text2.isHidden()) {option1text2.hide();};
+                if(option2text1 != null && !option2text1.isHidden()) {option2text1.hide();};
+                if(option2text2 != null && !option2text2.isHidden()) {option2text2.hide();};
+                if(option3text1 != null && !option3text1.isHidden()) {option3text1.hide();};
+                if(option3text2 != null && !option3text2.isHidden()) {option3text2.hide();};
+                if(option4text1 != null && !option4text1.isHidden()) {option4text1.hide();};
+                if(option4text2 != null && !option4text2.isHidden()) {option4text2.hide();};
             }
             // Now show the shop
             shopRect.show();
@@ -450,16 +599,25 @@ public class GameController extends WindowController implements ActionListener
             helpTextRect.hide();
             
             if(prompt.isHidden()) { prompt.show(); };
-            if(option1.isHidden()) { option1.show(); };
-            if(option2.isHidden()) { option2.show(); };
-            if(option3.isHidden()) { option3.show(); };
-            if(option4.isHidden()) { option4.show(); };
+            if(!option1wasHidden) { option1.show(); };
+            if(!option2wasHidden) { option2.show(); };
+            if(!option3wasHidden) { option3.show(); };
+            if(!option4wasHidden) { option4.show(); };
+            
+            if(promptText1 != null && promptText1.isHidden()) {promptText1.show();};
+            if(promptText2 != null && promptText2.isHidden()) {promptText2.show();};
+            if(promptText3 != null && promptText3.isHidden()) {promptText3.show();};
+            if(promptText4 != null && promptText4.isHidden()) {promptText4.show();};
+            if(option1text1 != null && option1text1.isHidden()) {option1text1.show();};
+            if(option1text2 != null && option1text2.isHidden()) {option1text2.show();};
+            if(option2text1 != null && option2text1.isHidden()) {option2text1.show();};
+            if(option2text2 != null && option2text2.isHidden()) {option2text2.show();};
+            if(option3text1 != null && option3text1.isHidden()) {option3text1.show();};
+            if(option3text2 != null && option3text2.isHidden()) {option3text2.show();};
+            if(option4text1 != null && option4text1.isHidden()) {option4text1.show();};
+            if(option4text2 != null && option4text2.isHidden()) {option4text2.show();};
             
             curShowHelp = false;
-            if (daysLeft == 20)
-            {
-                nextDay();
-            }
         }
         else {
             // Shop not being displayed and needs to be shown, first check if coming from
@@ -490,6 +648,19 @@ public class GameController extends WindowController implements ActionListener
             if(!option2.isHidden()) { option2.hide(); };
             if(!option3.isHidden()) { option3.hide(); };
             if(!option4.isHidden()) { option4.hide(); };
+            
+            if(promptText1 != null && !promptText1.isHidden()) {promptText1.hide();};
+            if(promptText2 != null && !promptText2.isHidden()) {promptText2.hide();};
+            if(promptText3 != null && !promptText3.isHidden()) {promptText3.hide();};
+            if(promptText4 != null && !promptText4.isHidden()) {promptText4.hide();};
+            if(option1text1 != null && !option1text1.isHidden()) {option1text1.hide();};
+            if(option1text2 != null && !option1text2.isHidden()) {option1text2.hide();};
+            if(option2text1 != null && !option2text1.isHidden()) {option2text1.hide();};
+            if(option2text2 != null && !option2text2.isHidden()) {option2text2.hide();};
+            if(option3text1 != null && !option3text1.isHidden()) {option3text1.hide();};
+            if(option3text2 != null && !option3text2.isHidden()) {option3text2.hide();};
+            if(option4text1 != null && !option4text1.isHidden()) {option4text1.hide();};
+            if(option4text2 != null && !option4text2.isHidden()) {option4text2.hide();};
             
             // Now show help
             helpTextRect.show();
@@ -533,25 +704,44 @@ public class GameController extends WindowController implements ActionListener
             {
                 winPic.hide();
             }
-            
+            return;
             // TODO reset the game properties
             
         }
+        if (option1.isHidden() && option2.isHidden() && option3.isHidden() && option4.isHidden() && !curShowShop && !curShowHelp)
+        {
+            ArrayList<toDo> todo = events.getToDoArray();
+            pooper = ( todo.get( 0 ) );
+            nextDay();
+            return;
+        }
         if(option1.contains(mousePosition) && !option1.isHidden())
         {
-            //do option 1
+            ArrayList<toDo> todo = events.getToDoArray();
+            pooper = ( todo.get( 0 ) );
+            nextDay();
+            return;
         }
         if(option2.contains(mousePosition) && !option2.isHidden())
         {
-            //do option 2
+            ArrayList<toDo> todo = events.getToDoArray();
+            pooper = ( todo.get(1) );
+            nextDay();
+            return;
         }
         if(option3.contains(mousePosition) && !option3.isHidden())
         {
-            //do option 3
+            ArrayList<toDo> todo = events.getToDoArray();
+            pooper = ( todo.get(2) );
+            nextDay();
+            return;
         }
         if(option4.contains(mousePosition) && !option4.isHidden())
         {
-            //do option 4
+            ArrayList<toDo> todo = events.getToDoArray();
+            pooper = ( todo.get(3) );
+            nextDay();
+            return;
         }
         if(helpTextRect.contains(mousePosition) && !helpTextRect.isHidden())
         {

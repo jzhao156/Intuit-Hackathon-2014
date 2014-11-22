@@ -25,8 +25,8 @@ public class Event
     prompts.add("Juicy Puicy Aerospace Company is selling their 'state of the art' cock pit on the black market. You do not know" 
                   +" if the product is functional or not. You choose to:");
     ArrayList<String> zero = new ArrayList<String>();
-    zero.add("take a gamble and buy the cockpit at the 'special' black market price $100,000");
-    zero.add("not buy, because black market deals are shady."); 
+    zero.add("Take a gamble and buy the cockpit at the 'special' black market price $100,000");
+    zero.add("Not buy, because black market deals are shady.");
     ArrayList<toDo> zeroV = new ArrayList<toDo>();
     Random generator = new Random();
     int pass = generator.nextInt(2);
@@ -52,8 +52,8 @@ public class Event
                 "non-FAA approved nuclear engine to early buyers. You do not know if the product is functional " +
                 "You choose to:");
     ArrayList<String> one = new ArrayList<String>();
-    one.add("take a gamble and buy the nuclear engine at the 'early discount' price of $100,000");
-    one.add("not buy, because what kind of company name is 'El Paco'?");
+    one.add("Take a gamble and buy the nuclear engine at the 'early discount' price of $100,000");
+    one.add("Not buy, because what kind of company name is 'El Paco'?");
     ArrayList<toDo> oneV = new ArrayList<toDo>();
     pass = generator.nextInt(2);
     if(pass==1)
@@ -77,8 +77,8 @@ public class Event
     prompts.add("Big Red Dog Airlines reports 'excess production' of their line of jet plane wings. They have placed it"
                   + "to be sold on the black market. They warn that the wings may be faulty. You choose to:");
     ArrayList<String> two = new ArrayList<String>();
-    two.add("take a gamble and buy the jet wings at the black market price of $100,000.");
-    two.add("not buy, obviously the wings are broken.");
+    two.add("Take a gamble and buy the jet wings at the black market price of $100,000.");
+    two.add("Not buy, obviously the wings are broken.");
     ArrayList<toDo> twoV = new ArrayList<toDo>();
     pass = generator.nextInt(2);
     if(pass==1)
@@ -102,8 +102,8 @@ public class Event
                 " and released on the black market. The dealer contacts you and offers you a 'low' price. He doesn't" +
                 " diclose the condition of these systems. You choose to:");
     ArrayList<String> three = new ArrayList<String>();
-    three.add("take a gamble and buy the life support systems at the black market price of $100,000");
-    three.add("not buy, the support systems may be damaged.");
+    three.add("Take a gamble and buy the life support systems at the black market price of $100,000");
+    three.add("Not buy, the support systems may be damaged.");
     ArrayList<toDo> threeV = new ArrayList<toDo>();
     pass = generator.nextInt(2);
     if(pass==1)
@@ -127,8 +127,8 @@ public class Event
     prompts.add("Ord Propulsion Laboratories is going out of business and selling all their patented jet thrusters for"
                   +" a clearance price. You don't know the quality of these thrusters. You choose to:");
     ArrayList<String> four = new ArrayList<String>();
-    four.add("take a gamble and buy the thrusters at the clearance price.");
-    four.add("not buy, the company is going out of business for a reason. The thrusters must be faulty.");
+    four.add("Take a gamble and buy the thrusters at the clearance price.");
+    four.add("Not buy, the company is going out of business for a reason. The thrusters must be faulty.");
     ArrayList<toDo> fourV = new ArrayList<toDo>();
     pass = generator.nextInt(2);
     if(pass==1)
@@ -151,9 +151,9 @@ public class Event
     //prompt 5
     prompts.add("A benevolent benofactor gifts you $100,000. With this money, you choose to:");
     ArrayList<String> five = new ArrayList<String>();
-    five.add("do nothing with it. Just take the $100,000.");
-    five.add("invest in the recent rise in popularity of lemonade stands. Increase your daily income by $10,000.");
-    five.add("take half of the gift: $50,000, and use the other half for investment: $5,000 increase in daily income.");
+    five.add("Do nothing with it. Just take the $100,000.");
+    five.add("Invest in the recent rise in popularity of lemonade stands. Increase your daily income by $10,000.");
+    five.add("Take half of the gift: $50,000, and use the other half for investment: $5,000 increase in daily income.");
     ArrayList<toDo> fiveV = new ArrayList<toDo>();
     toDo five0 = new toDo(5,-1,100000,0);
     toDo five1 = new toDo(5, -1,0,10000);
@@ -173,7 +173,7 @@ public class Event
     six.add("Sponsor the team to do a global tour. You pay $100,000 but your daily income increases by $10,000.");
     six.add("Negotiate a deal to sell a Harlem Globe Trotters clothing line. You spend $250,000, but your income" +
               " increases by $30,000 each day.");
-    six.add("nothing, because the Harlem Globe Trotters are overrated.");
+    six.add("Nothing, because the Harlem Globe Trotters are overrated.");
     ArrayList<toDo> sixV = new ArrayList<toDo>();
     toDo six0 = new toDo(6,-1,-100000,10000);
     toDo six1 = new toDo(6,-1,-250000,30000);
@@ -192,9 +192,9 @@ public class Event
                 " you have been forced to pay a portion of your wealth to the government. You are given two choices."+
                 " You choose to:");
     ArrayList<String> seven = new ArrayList<String>();
-    seven.add("offer $15,000 of your daily income.");
-    seven.add("offer a flat amount of $150,000.");
-    seven.add("take your chances and ignore the government. (possibly random fine or possible no fine)");
+    seven.add("Offer $15,000 of your daily income.");
+    seven.add("Offer a flat amount of $150,000.");
+    seven.add("Take your chances and ignore the government. (possibly random fine or possible no fine)");
     //lose 100-200k
     ArrayList<toDo> sevenV = new ArrayList<toDo>();
     toDo seven0 = new toDo(7,-1,0,-15000);
@@ -213,9 +213,9 @@ public class Event
     prompts.add("Your rival who has decided to build a bunker tries to buy you out. He offers you a large sum of money in"
                   +" in exchange for all your income sources. You decide to:");
     ArrayList<String> eight = new ArrayList<String>();
-    eight.add("take him up on his offer. Your income is now 0, but you receive $500,000");
-    eight.add("propose a counteroffer. You pay him $500,000 but he gives you his assets. Your daily income increases by $50,000");
-    eight.add("decline. Engage in a staring contest and then walk away.");
+    eight.add("Take him up on his offer. Your income is now 0, but you receive $500,000");
+    eight.add("Propose a counteroffer. You pay him $500,000 but he gives you his assets. Your daily income increases by $50,000");
+    eight.add("Decline. Engage in a staring contest and then walk away.");
     ArrayList<toDo> eightV = new ArrayList<toDo>();
     int income = p.getIncome();
     toDo eight0 = new toDo(8,-1,500000,-income);
@@ -233,9 +233,9 @@ public class Event
     prompts.add("The IRS notifies you that you've been avoiding your taxes. Given the current state of the world, they" +
                 " decide to be nice and offer you two choices. You can choose to:");
     ArrayList<String> nine = new ArrayList<String>();
-    nine.add("pay a flat $150,000 fine");
-    nine.add("take a $15,000 cut to your daily income");
-    nine.add("move to Switzerland( and take a $7,500 income cut and pay for plane tickets for $75,000)");
+    nine.add("Pay a flat $150,000 fine");
+    nine.add("Take a $15,000 cut to your daily income");
+    nine.add("Move to Switzerland( and take a $7,500 income cut and pay for plane tickets for $75,000)");
     ArrayList<toDo> nineV = new ArrayList<toDo>();
     toDo nine0 = new toDo(9,-1,-150000,0);
     toDo nine1 = new toDo(9,-1,0,-15000);
@@ -297,7 +297,7 @@ public class Event
     ArrayList<String> twelve = new ArrayList<String>();
     twelve.add("Pay $100,000 to lobby for Congress to increase your funding by $20,000 every day.");
     twelve.add("Pay $50,000 to lobby for Congress to increase your funding by $7,500 every day.");
-    twelve.add("do nothing. Using money to manipulate the government is bad.");
+    twelve.add("Do nothing. Using money to manipulate the government is bad.");
     ArrayList<toDo> twelveV = new ArrayList<toDo>();
     toDo twelve0 = new toDo(12,-1,-100000,20000);
     toDo twelve1 = new toDo(12,-1,-50000,7500);
