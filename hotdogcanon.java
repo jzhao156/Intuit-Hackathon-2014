@@ -44,6 +44,8 @@ void nextDay()
     // GET PROMPT STRING HERE!!!
     String prompt = event.getPrompt( temp );
     
+    // add to black list since its not on it and it's gonna do it.
+    bl.add( temp );    
     // IF POSSIBLE, GET OPTIONS
     xxActioNxx tempA = events.get( temp );
     if( tempA instanceof Options )
@@ -61,7 +63,7 @@ void nextDay()
     }
     
     // go to next screen, homepage
-
+    event.nextDay();
 }
 temptoDo = eventVal.get( 
 if ( temptoDo.getIndex() >= options.size() )
