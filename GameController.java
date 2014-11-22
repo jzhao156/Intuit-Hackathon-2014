@@ -21,7 +21,7 @@ public class GameController extends WindowController implements ActionListener
     private Player player;
     String[] optionStrings;
     
-    public final int NUM_CHAR_PER_LINE = 60;
+    public final int NUM_CHAR_PER_LINE = 64;
     
     int index = 0;
     
